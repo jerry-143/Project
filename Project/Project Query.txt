@@ -1,0 +1,126 @@
+1)
+CREATE TABLE TRAINING_PROGRAM (Training_Code int(10) AUTO_INCREMENT PRIMARY KEY,
+     Course_code int(5),
+     Faculty_Code int(5),
+     Start_Date DATE,
+     End_Date DATE,
+     FOREIGN KEY(Course_code) REFERENCES COURSE_MASTER(Course_ID),
+     FOREIGN KEY(Faculty_Code) REFERENCES EMPLOYEE_MASTER(Employee_ID));
+
+INSERT INTO TRAINING_PROGRAM(Course_Code,Faculty_Code,Start_Date,End_Date)
+     VALUES(535,53003,'2018-12-03','2018-12-21'),
+           (536,53004,'2018-12-06','2018-12-19'),
+           (537,53005,'2018-12-10','2018-12-28'),
+           (538,53006,'2018-12-03','2019-01-04');
+
+
+
+
+2)
+CREATE TABLE COURSE_MASTER(
+  Course_ID int(5) NOT NULL AUTO_INCREMENT,
+  Course_Name varchar(50) NOT NULL,
+   No_of_Days varchar(5) NOT NULL, 
+   PRIMARY KEY (Course_ID));
+
+
+INSERT INTO COURSE_MASTER(Course_Name,No_of_Days)
+    VALUES('Java',15),
+          ('Business Intelligence',10),
+          ('SAP ABAP',15),
+          ('Automation',25);
+
+
+
+
+
+3)
+CREATE TABLE FACULTY_SKILL(
+  Faculty_Id int NOT NULL,
+  Skill_Set varchar(200) NOT NULL,
+  FOREIGN KEY(Faculty_Id) REFERENCES EMPLOYEE_MASTER(Employee_ID));
+
+
+
+
+
+4)
+ CREATE TABLE FEEDBACK_MASTER(
+  Training_Code int(5) ,
+  Participant_Id int(5),
+  FB_Prs_comm int(1),
+  FB_Clrfy_dbts int(1),
+  FB_TM int(1),
+  FB_Hnd_out int(1),
+  FB_Hw_Sw_Ntwrk int(1),
+  Comments varchar(200),
+  Suggestions varchar(200),
+  FOREIGN KEY(Training_Code) REFERENCES TRAINING_PROGRAM(Training_Code),
+  FOREIGN KEY(Participant_Id) REFERENCES EMPLOYEE_MASTER(Employee_ID));
+
+
+
+insert into feedback_master values (1001,53011,3,2,1,3,3,'no comments','no suggestions');
+  
+  
+5)
+  CREATE TABLE TRAINING_PARTICIPANT_ENROLLMENT(
+   Training_Code int(5),
+   Participant_Id int(5),
+   FOREIGN KEY(Training_Code) REFERENCES TRAINING_PROGRAM(Training_Code),
+   FOREIGN KEY(Participant_Id) REFERENCES EMPLOYEE_MASTER(Employee_ID));
+
+
+
+INSERT INTO TRAINING_PARTICIPANT_ENROLLMENT(Training_Code,Participant_Id)
+  VALUES(1,53007),
+        (1,53008),
+        (1,53009),
+        (1,53010),
+        (1,53011),
+        (2,53012),
+        (2,53013),
+        (2,53014),
+        (2,53015),
+        (2,53016),
+        (3,53017),
+        (3,53018),
+        (3,53019),
+        (3,53020),
+        (3,53021),
+        (4,53022),
+        (4,53023),
+        (4,53024),
+        (4,53025);
+
+  
+6)
+ Create table EMPLOYEE_MASTER(
+    Employee_ID int(5) PRIMARY KEY AUTO_INCREMENT,
+    EmployeeName varchar(50) NOT NULL,
+    Password varchar(20) UNIQUE,
+    Role varchar(20) NOT NULL); 
+
+
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+     VALUES(53001,'Pratencha','Admin@12','Admin');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+      VALUES(53002,'Inderpreet Kaur','Coord@34','Co-coordinator');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+  VALUES(53003,'Mohammed Akif','Mohammed@45','Faculty');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+     VALUES (53004,'Ankita Nayak','Anki@45','Faculty');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+      VALUES(53005, 'Deepesh Vishwakarma', 'Deep@45' ,'Faculty');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+      VALUES(53006,'Shivani Jain','Shiv@45','Faculty');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+      VALUES(53007,'Antony','Antony@12','Participant');
+INSERT INTO EMPLOYEE_MASTER(Employee_ID,EmployeeName,Password,Role)
+      VALUES(53008,'Riyen Jerome','Riyen@12','Participant');
+
+
+
+
+
+
